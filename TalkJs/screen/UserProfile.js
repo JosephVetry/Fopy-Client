@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, SafeAreaView, FlatList, Item } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, SafeAreaView, FlatList, Item, Modal } from 'react-native';
 import { Avatar, Button, Card } from 'react-native-paper';
-
+import Topup from '../components/TopUp';
 const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -20,35 +20,24 @@ export default function Profile() {
             title: 'Third Item',
         },
         {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'First Item',
+            id: '4b81341b-4089-4327-80fd-0fd32f8a3e61',
+            title: 'Fourth Item',
         },
         {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Second Item',
+            id: '86707545-7baf-4782-9b7c-3921f0b2578b',
+            title: 'Fifth Item',
         },
         {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Third Item',
+            id: 'e4d1c79f-df38-47de-9b37-817fe67c48c5',
+            title: 'Sixth Item',
         },
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'First Item',
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Second Item',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Third Item',
-        },
-    ];
+    ];    
     const Item = ({ title }) => (
         <View style={styles.item}>
             <Text style={styles.title}>{title}</Text>
         </View>
     );
+    const [modalOpen, setModalOpen] = useState(false)
     return (
         <View
             style={[
@@ -57,6 +46,14 @@ export default function Profile() {
                     flexDirection: 'column',
                 },
             ]}>
+            <View>
+                <Modal visible={modalOpen}>
+                    <View style={{ flex: 1.5, alignItems: 'center'}}>
+                        <Topup/>
+                        <Button mode="contained" onPress={() => setModalOpen(false)} >Back</Button>
+                    </View>
+                </Modal>
+            </View>
             <ScrollView>
                 <ImageBackground source={image} resizeMode="cover" style={styles.image}>
                     <View style={{ flex: 0.5, backgroundColor: '#90e0ef' }} />
@@ -77,7 +74,7 @@ export default function Profile() {
                                 </Card.Content>
                                 <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
                                     <Card.Actions>
-                                        <Button mode="contained" onPress={() => console.log('Topup here pls')} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
+                                        <Button mode="contained" onPress={() => setModalOpen(true)} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
                                     </Card.Actions>
                                 </View>
                             </Card>
@@ -174,7 +171,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 32,
-      },
+    },
 });
 
 // AppRegistry.registerComponent('YourApp', () => Profile); // Only needed if using AppRegistry

@@ -28,15 +28,15 @@ export default function Topup({ navigation }) {
                     placeholder="0" />
                 <View style={styles.fixToText}>
                     <Button
-                        title="Login"
+                        title="Confirm topup"
                         onPress={() => console.log('Midtrans here')}
                     />
                 </View>
                 </Card.Content>
                 </Card>
 
-            </View>
             <View style={{ flex: 3, backgroundColor: 'green' }} />
+            </View>
         </View>
     );
 }
