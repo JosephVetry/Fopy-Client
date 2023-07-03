@@ -1,9 +1,18 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+import axios from 'axios'
+const BASE_URL = 'http://localhost:3000/midtrans'
 
-export default function Midtrans() {
+export default function Midtrans({ route }) {
+  const [number, onChangeNumber] = React.useState('');
+  console.log(route.params.amount);
+  useEffect(() => {
+    const { data } = axios.post(BASE_URL)
+    onChangeNumber(data.redirect_url)
+    console.log(data);
+  }, [])
   return (
     <WebView
       style={styles.container}

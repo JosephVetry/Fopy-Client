@@ -6,6 +6,8 @@ import Chat from './screen/Chat'
 import UserProfile from './screen/UserProfile'
 import Topup from './components/TopUp';
 import Midtrans from './screen/Midtrans';
+import DriverLogin from './screen/DriverLogin';
+import DriverOrderList from './screen/DriverOrderList';
 
 const Stack = createNativeStackNavigator()
 function DetailsScreen() {
@@ -23,8 +25,10 @@ export default function App() {
       {/* <Topup name="Topup" components={Topup}/> */}
       {/* <Text>Testing 123</Text> */}
       <Stack.Navigator>
-        <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false }}/>
-        <Stack.Screen name="Midtrans" component={Midtrans}/>
+        {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/> */}
+        {/* <Stack.Screen name='DriverOrderList' component={DriverOrderList}/> */}
+        <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Midtrans" component={Midtrans} />
       </Stack.Navigator>
       {/* <StatusBar style="auto" /> */}
     </NavigationContainer>
