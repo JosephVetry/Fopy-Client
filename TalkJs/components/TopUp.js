@@ -1,12 +1,14 @@
 import {
-    StyleSheet, Button, View, SafeAreaView, Text, Image, TextInput
+    StyleSheet, Button, View, Text, TextInput
 } from 'react-native';
-import { Avatar, Card } from 'react-native-paper';
+import { Card } from 'react-native-paper';
 import React from 'react';
+import { WebView } from 'react-native-webview';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Topup({ navigation }) {
-    const Separator = () => <View style={styles.separator} />;
 
+export default function Topup() {
+    const navigation = useNavigation();
     return (
         <View
             style={[
@@ -25,11 +27,12 @@ export default function Topup({ navigation }) {
                 </Text>
                 <TextInput
                     style={styles.input}
-                    placeholder="0" />
+                    placeholder="0"
+                     />
                 <View style={{ alignItems: 'center', marginTop: 5}}>
                     <Button
                         title="Confirm topup"
-                        onPress={() => console.log('Midtrans here')}
+                        onPress={() => navigation.navigate('Midtrans')}
                     />
                 </View>
                 </Card.Content>

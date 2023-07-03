@@ -39,7 +39,7 @@ export default function Profile() {
         </View>
     );
     const [modalOpen, setModalOpen] = useState(false)
-    
+
     return (
         <View
             style={[
@@ -61,57 +61,54 @@ export default function Profile() {
                 </Modal>
             </View>
 
-            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                <View style={{ flex: 0.25, backgroundColor: '#90e0ef' }} />
-                <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#90e0ef' }}>
-                    <View style={styles.profilepicWrap}>
-                        <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
-                    </View>
-                    <Text style={styles.name}>JOHN DOE USERNAME</Text>
-                    <Text style={styles.pos}>USER PROFILE EMAIL</Text>
+            <View style={{ flex: 0.25, backgroundColor: '#90e0ef' }} />
+            <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#90e0ef' }}>
+                <View style={styles.profilepicWrap}>
+                    <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
                 </View>
+                <Text style={styles.name}>JOHN DOE USERNAME</Text>
+                <Text style={styles.pos}>USER PROFILE EMAIL</Text>
+            </View>
 
-                <View style={{ flex: 3, backgroundColor: '#caf0f8' }}>
-                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
-                        <Card mode='elevated'>
-                            <Card.Content>
-                                <Text style={{ fontSize: 24, textAlign: 'center' }}>Balance</Text>
-                                <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. 0</Text>
-                            </Card.Content>
-                            <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
-                                <Card.Actions>
-                                    <Button mode="contained" onPress={() => setModalOpen(true)} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
-                                </Card.Actions>
+            <View style={{ flex: 3, backgroundColor: '#caf0f8' }}>
+                <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
+                    <Card mode='elevated'>
+                        <Card.Content>
+                            <Text style={{ fontSize: 24, textAlign: 'center' }}>Balance</Text>
+                            <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. 0</Text>
+                        </Card.Content>
+                        <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
+                            <Card.Actions>
+                                <Button mode="contained" onPress={() => setModalOpen(true)} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
+                            </Card.Actions>
+                        </View>
+                    </Card>
+                </View>
+                <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                    <Card mode='elevated'>
+                        <Card.Content>
+                            <Text style={{ fontSize: 25, textAlign: 'center' }}>History</Text>
+                            <View style={{ height: 150, margin: 5 }}>
+                                <FlatList
+                                    data={DATA}
+                                    renderItem={({ item }) => <Item title={item.title} />}
+                                    keyExtractor={item => item.id}
+                                />
                             </View>
-                        </Card>
-                    </View>
-                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                        <Card mode='elevated'>
-                            <Card.Content>
-                                <Text style={{ fontSize: 25, textAlign: 'center' }}>History</Text>
-                                <View style={{ height: 150, margin: 5 }}>
-                                    <FlatList
-                                        data={DATA}
-                                        renderItem={({ item }) => <Item title={item.title} />}
-                                        keyExtractor={item => item.id}
-                                    />
-                                </View>
-                            </Card.Content>
-                        </Card>
-                    </View>
-                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                        <Button mode="contained" onPress={() => console.log('Back to Home')}>
-                            Back
-                        </Button>
-                    </View>
-                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                        <Button mode="contained" onPress={() => console.log('Logout')}>
-                            Logout
-                        </Button>
-                    </View>
+                        </Card.Content>
+                    </Card>
                 </View>
-            </ImageBackground>
-
+                <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                    <Button mode="contained" onPress={() => console.log('Back to Home')}>
+                        Back
+                    </Button>
+                </View>
+                <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                    <Button mode="contained" onPress={() => console.log('Logout')}>
+                        Logout
+                    </Button>
+                </View>
+            </View>
         </View>
     );
 }
