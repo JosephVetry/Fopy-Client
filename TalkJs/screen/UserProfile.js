@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, ScrollView, SafeAreaView, FlatList, Item, Modal } from 'react-native';
-import { Avatar, Button, Card } from 'react-native-paper';
+import { StyleSheet, Text, View, Image, ImageBackground, FlatList, Modal } from 'react-native';
+import { Button, Card } from 'react-native-paper';
 import Topup from '../components/TopUp';
+
 const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -31,13 +32,14 @@ export default function Profile() {
             id: 'e4d1c79f-df38-47de-9b37-817fe67c48c5',
             title: 'Sixth Item',
         },
-    ];    
+    ];
     const Item = ({ title }) => (
         <View style={styles.item}>
             <Text style={styles.title}>{title}</Text>
         </View>
     );
     const [modalOpen, setModalOpen] = useState(false)
+    
     return (
         <View
             style={[
@@ -47,86 +49,69 @@ export default function Profile() {
                 },
             ]}>
             <View>
-                <Modal visible={modalOpen}>
-                    <View style={{ flex: 1.5, alignItems: 'center'}}>
-                        <Topup/>
-                        <Button mode="contained" onPress={() => setModalOpen(false)} >Back</Button>
+                <Modal
+                    visible={modalOpen}
+                >
+                    <View style={{ flex: 0.6, alignItems: 'center', backgroundColor: 'grey' }}>
+                        <Topup />
+                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                            <Button mode="contained" onPress={() => setModalOpen(false)} >Back</Button>
+                        </View>
                     </View>
                 </Modal>
             </View>
-            <ScrollView>
-                <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-                    <View style={{ flex: 0.5, backgroundColor: '#90e0ef' }} />
-                    <View style={{ flex: 1.3, alignItems: 'center', backgroundColor: '#90e0ef' }}>
-                        <View style={styles.profilepicWrap}>
-                            <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
-                        </View>
-                        <Text style={styles.name}>JOHN DOE USERNAME</Text>
-                        <Text style={styles.pos}>USER PROFILE EMAIL</Text>
-                    </View>
 
-                    <View style={{ flex: 3, backgroundColor: '#caf0f8' }}>
-                        <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
-                            <Card mode='elevated'>
-                                <Card.Content>
-                                    <Text style={{ fontSize: 24, textAlign: 'center' }}>Balance</Text>
-                                    <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. 0</Text>
-                                </Card.Content>
-                                <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
-                                    <Card.Actions>
-                                        <Button mode="contained" onPress={() => setModalOpen(true)} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
-                                    </Card.Actions>
-                                </View>
-                            </Card>
-                        </View>
-                        <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                            <Card mode='elevated'>
-                                <Card.Content>
-                                    <Text style={{ fontSize: 20, textAlign: 'center', backgroundColor: 'red' }}>History</Text>
-                                    <ScrollView>
-                                        <SafeAreaView>
-                                            <FlatList
-                                                data={DATA}
-                                                renderItem={({ item }) => <Item title={item.title} />}
-                                                keyExtractor={item => item.id}
-                                            />
-                                        </SafeAreaView>
-                                    </ScrollView>
-                                    {/* <ScrollView> */}
-                                    {/* <View style={{ marginTop: 5, marginBottom: 5 }}>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                                <Text style={{ fontSize: 15 }}>Service name and date of purchase</Text>
-                                            </View> */}
-                                    {/* </ScrollView> */}
-                                </Card.Content>
-                            </Card>
-                        </View>
-                        <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                            <Button mode="contained" onPress={() => console.log('Pressed')}>
-                                Back
-                            </Button>
-                        </View>
-                        <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                            <Button mode="contained" onPress={() => console.log('Pressed')}>
-                                Logout
-                            </Button>
-                        </View>
+            <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+                <View style={{ flex: 0.25, backgroundColor: '#90e0ef' }} />
+                <View style={{ flex: 1, alignItems: 'center', backgroundColor: '#90e0ef' }}>
+                    <View style={styles.profilepicWrap}>
+                        <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
                     </View>
-                </ImageBackground>
-            </ScrollView>
+                    <Text style={styles.name}>JOHN DOE USERNAME</Text>
+                    <Text style={styles.pos}>USER PROFILE EMAIL</Text>
+                </View>
+
+                <View style={{ flex: 3, backgroundColor: '#caf0f8' }}>
+                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
+                        <Card mode='elevated'>
+                            <Card.Content>
+                                <Text style={{ fontSize: 24, textAlign: 'center' }}>Balance</Text>
+                                <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. 0</Text>
+                            </Card.Content>
+                            <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
+                                <Card.Actions>
+                                    <Button mode="contained" onPress={() => setModalOpen(true)} style={{ backgroundColor: '#89cff1' }}>Topup</Button>
+                                </Card.Actions>
+                            </View>
+                        </Card>
+                    </View>
+                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                        <Card mode='elevated'>
+                            <Card.Content>
+                                <Text style={{ fontSize: 25, textAlign: 'center' }}>History</Text>
+                                <View style={{ height: 150, margin: 5 }}>
+                                    <FlatList
+                                        data={DATA}
+                                        renderItem={({ item }) => <Item title={item.title} />}
+                                        keyExtractor={item => item.id}
+                                    />
+                                </View>
+                            </Card.Content>
+                        </Card>
+                    </View>
+                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                        <Button mode="contained" onPress={() => console.log('Back to Home')}>
+                            Back
+                        </Button>
+                    </View>
+                    <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
+                        <Button mode="contained" onPress={() => console.log('Logout')}>
+                            Logout
+                        </Button>
+                    </View>
+                </View>
+            </ImageBackground>
+
         </View>
     );
 }
@@ -170,7 +155,7 @@ const styles = StyleSheet.create({
         // padding: 20
     },
     title: {
-        fontSize: 32,
+        fontSize: 20,
     },
 });
 

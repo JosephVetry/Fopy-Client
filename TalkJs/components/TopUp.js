@@ -26,7 +26,7 @@ export default function Topup({ navigation }) {
                 <TextInput
                     style={styles.input}
                     placeholder="0" />
-                <View style={styles.fixToText}>
+                <View style={{ alignItems: 'center', marginTop: 5}}>
                     <Button
                         title="Confirm topup"
                         onPress={() => console.log('Midtrans here')}
@@ -35,8 +35,8 @@ export default function Topup({ navigation }) {
                 </Card.Content>
                 </Card>
 
-            <View style={{ flex: 3, backgroundColor: 'green' }} />
             </View>
+            {/* <View style={{ flex: 3, backgroundColor: 'green' }} /> */}
         </View>
     );
 }
@@ -44,6 +44,7 @@ export default function Topup({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
     input: {
         height: 40,
