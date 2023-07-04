@@ -35,22 +35,27 @@ export default function TopupHistory() {
     ];
 
     return (
-        <Card mode='elevated'>
-        <Card.Content>
-            <Text style={{ fontSize: 15, textAlign: 'center' }}>Topup History</Text>
-            <View style={{margin: 5, height:100 }}>
-                <ScrollView style={{height: 100}} showsVerticalScrollIndicator={true}>
-                    {DATA.map((el) => {
-                        return (
-                            <View key={el.id}>
-                                <Text style={{ fontSize: 30 }}>{el.title}</Text>
-                            </View>
-                        )
-                    })}
-                </ScrollView>
+        <View style={[styles.container]}>
+            <View style={{ flex: 1 }} />
+            <View style={{ justifyContent: 'center', alignSelf: 'center' }}>
+                <Card mode='elevated'>
+                    <Card.Content>
+                        <Text style={{ fontSize: 15, textAlign: 'center' }}>Topup History</Text>
+                        <View style={{ margin: 5, height: 100 }}>
+                            <ScrollView style={{ height: 100 }} showsVerticalScrollIndicator={true}>
+                                {DATA.map((el) => {
+                                    return (
+                                        <View key={el.id}>
+                                            <Text style={{ fontSize: 20 }}>{el.title}</Text>
+                                        </View>
+                                    )
+                                })}
+                            </ScrollView>
+                        </View>
+                    </Card.Content>
+                </Card>
             </View>
-        </Card.Content>
-    </Card>
+        </View>
     );
 }
 
