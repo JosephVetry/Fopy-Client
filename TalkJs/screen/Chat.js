@@ -2,14 +2,16 @@
 import * as TalkRn from '@talkjs/expo';
 
 function ChatComponent(props) {
+    // me = orang yg login, req.user.id
     const me = {
-        id: '123456789',
-        name: 'Alice',
+        id: 'FOPY-user-1',
+        name: 'FOPY User 1',
     };
 
     const other = {
-        id: '987654321',
-        name: 'Seb',
+        // mitra yang dipilih (fetch id si admin atau mitra)
+        id: 'FOPY-2', // nanti, ini diganti jadi AdministratorId
+        name: 'FOPY Admin 2',
     };
 
     const conversationBuilder = TalkRn.getConversationBuilder(
@@ -20,7 +22,7 @@ function ChatComponent(props) {
     conversationBuilder.setParticipant(other);
 
     return (
-        <TalkRn.Session appId='tlSwkOpZ' me={me}>
+        <TalkRn.Session appId='tC5aOcLg' me={me}>
             <TalkRn.Chatbox conversationBuilder={conversationBuilder} />
         </TalkRn.Session>
     );

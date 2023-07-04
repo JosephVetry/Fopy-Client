@@ -1,29 +1,39 @@
-import {
-    StyleSheet, Button, View, Text, TextInput
-} from 'react-native';
+import { StyleSheet, Button, View, Text, TextInput } from 'react-native';
 import { Card } from 'react-native-paper';
-import React, { useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+const BASE_URL = 'http://localhost:3000/user/midtrans';
 
-
-export default function Topup() {
+export default function Topup({ setModalOpen }) {
     const [number, onChangeNumber] = React.useState('');
     const navigation = useNavigation();
 
-    useEffect(()=> {
+    async function fetchMidtrans() {
+        try {
+            const { data } = await axios({
+                url: BASE_URL,
+                method: 'POST',
+                data: {
+                    amount: number,
+                },
+                headers: {
+                    access_token:
+                        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImFsZXgwMSIsImlhdCI6MTY4ODM3Mzk1Mn0.Q-JBjYfsO0gBAGkWQJFV7aGbpW9Gt2lvFspwPEZtaN4',
+                },
+            });
+            console.log(data, ` <<< data`);
+            return data.redirect_url;
+        } catch (error) {
+            console.log(error, `kbhdfakfjkn <<<<<<`);
+        }
+    }
+    useEffect(() => {
         console.log(number);
     })
 
     return (
-        <View
-            style={[
-                styles.container,
-                {
-                    // Try setting `flexDirection` to `"row"`.
-                    flexDirection: 'column',
-                },
-            ]}>
+        <View style={[styles.container, { flexDirection: 'column', },]}>
             <View style={{ flex: 1 }} />
             <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
                 <Card mode='elevated'>
@@ -41,15 +51,19 @@ export default function Topup() {
                         />
                         <View style={{ alignItems: 'center', marginTop: 5 }}>
                             <Button
-                                title="Confirm topup"
-                                onPress={() => navigation.navigate('Midtrans', {amount: number})}
+                                title='Confirm topup'
+                                onPress={() => {
+                                    // gue tambahin
+                                    fetchMidtrans(number).then((url) => {
+                                        setModalOpen(false);
+                                        navigation.navigate('Midtrans', { url });
+                                    });
+                                }}
                             />
                         </View>
                     </Card.Content>
                 </Card>
-
             </View>
-            {/* <View style={{ flex: 3, backgroundColor: 'green' }} /> */}
         </View>
     );
 }
@@ -57,7 +71,6 @@ export default function Topup() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     input: {
         height: 40,

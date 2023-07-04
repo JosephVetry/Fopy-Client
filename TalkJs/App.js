@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Chat from './screen/Chat'
 import UserProfile from './screen/UserProfile'
-import Topup from './components/TopUp';
 import Midtrans from './screen/Midtrans';
 import DriverLogin from './screen/DriverLogin';
 import DriverOrderList from './screen/DriverOrderList';
@@ -20,15 +19,12 @@ function DetailsScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      {/* <Chat name="ChatScreen" components={Chat}/> */}
-      {/* <UserProfile name="UserProfile" components={UserProfile}/> */}
-      {/* <Topup name="Topup" components={Topup}/> */}
-      {/* <Text>Testing 123</Text> */}
       <Stack.Navigator>
-        {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/> */}
-        {/* <Stack.Screen name='DriverOrderList' component={DriverOrderList}/> */}
         <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false }} />
+        <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Midtrans" component={Midtrans} />
+        {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/>
+        <Stack.Screen name='DriverOrderList' component={DriverOrderList}/> */}
       </Stack.Navigator>
       {/* <StatusBar style="auto" /> */}
     </NavigationContainer>
