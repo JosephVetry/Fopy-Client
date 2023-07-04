@@ -1,10 +1,21 @@
-import React from "react";
-import { StyleSheet, View, Image, Text, ImageBackground } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Image, Text, ImageBackground, FlatList } from "react-native";
 import { carouselData } from "../assets/carouselData";
 import Carousel from "../components/CarouselFile";
 import ServicesCard from "../components/ServicesCard";
+import { fetchMitra } from "../store/action";
+import { useDispatch, useSelector } from "react-redux";
+
 
 export default function HomePage({navigation}) {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchMitra())
+  }, [])
+
+  const { mitras } = useSelector((state =>{
+    return state
+  }))
   return (
     <View
       style={[ 
@@ -38,7 +49,18 @@ export default function HomePage({navigation}) {
         <Carousel data={carouselData} />
       </View>
       <View style={{ flex: 4, marginHorizontal: 20, marginVertical: 20 }}>
-        <ServicesCard navigation={navigation}/>
+        <FlatList
+        showsVerticalScrollIndicator = {false}
+        data = {mitras}
+        keyExtractor={(item)=>{
+          item.id
+        }}
+        renderItem={({item})=>(
+          <ServicesCard data = {item} navigation={navigation}/>
+        )}
+        >
+
+        </FlatList>
       </View>
     </View>
   );

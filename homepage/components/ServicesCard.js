@@ -1,10 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { Icon, IconButton } from "@react-native-material/core";
+import { useDispatch } from "react-redux";
+import {showMitraService} from '../store/action'
 
 
-
-const ServicesCard = ({navigation}) => {
+const ServicesCard = ({data, navigation}) => {
+  const dispatch = useDispatch()
   return (
     <View style={styles.cardContainer}>
       <View style={{ flex: 1, flexDirection: "row" }}>
@@ -23,7 +25,8 @@ const ServicesCard = ({navigation}) => {
         </View>
         <View style={{ flex: 1 }}>
           <View style={{ flex: 4 }}>
-            <Text style={{marginBottom : 10, marginTop : 10, fontSize : 20}}>nama mitra</Text>
+            <Text style={{marginBottom : 10, marginTop : 10, fontSize : 20}}>{data.mitraName}</Text>
+            <Text>{data.status}</Text>
             <Text>distance</Text>
           </View>
           <View style={{ flex: 1,  flexDirection : 'row' }}>
@@ -31,7 +34,10 @@ const ServicesCard = ({navigation}) => {
             <IconButton onPress={() => {console.log('ini chat')}}  icon={<Icon name="chat" size={30}/>} style={{flex : 1}} color="black"/>
             </View>
             <View style={{flex : 1,  justifyContent : 'center', alignItems : 'center'}}>
-            <IconButton onPress={() => navigation.navigate('AgentDetail')}  icon={<Icon name="home" size={30}/>} style={{flex : 1}} color="black"/>
+            <IconButton onPress={() => {
+              navigation.navigate('AgentDetail')
+              dispatch(showMitraService(data.id))
+              } } icon={<Icon name="home" size={30}/>} style={{flex : 1}} color="black"/>
             </View>
           </View>
         </View>
