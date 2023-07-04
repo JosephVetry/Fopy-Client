@@ -16,9 +16,12 @@ import { Madoka } from "react-native-textinput-effects";
 import * as DocumentPicker from "expo-document-picker";
 import { TextInput } from "@react-native-material/core";
 
-export default function AgentServicesCard() {
+export default function AgentServicesCard(data) {
   const [modalVisible, setModalVisible] = useState(false);
   const [singleFile, setSingleFile] = useState(null);
+  let orders = []
+
+
 
   return (
     <View style={styles.container}>
@@ -48,8 +51,8 @@ export default function AgentServicesCard() {
             }}
           >
             <View style ={{justifyContent : 'center', alignItems : 'center'}}>
-            <Text style={{fontSize : 20}}>
-              nama service
+            <Text style={{fontSize : 20, marginTop  : 10}}>
+              {data.data.name}
             </Text>
             </View>
              <TextInput keyboardType="numeric" variant="standard"  style={{ margin: 16, borderColor : 'black' }} />            
@@ -63,7 +66,8 @@ export default function AgentServicesCard() {
                 })
                 .then(result=>{
 
-                  console.log(result)
+                  orders.push(result)
+                  console.log(orders)
                 })
                 .catch(err=>{
                   console.log(err)
@@ -75,7 +79,7 @@ export default function AgentServicesCard() {
           </View>
           <View style ={{backgroundColor : '#DFE9F4', flex : 0.29}}>
           <Text>
-              *per lembar price : 
+              *per lembar price : {data.data.price}
             </Text>
           </View>
           <View
@@ -126,9 +130,9 @@ export default function AgentServicesCard() {
         }}
       >
         <View style={{ flex: 1, borderRadius: 20 }}>
-          <Text style={styles.nameFont}>Administrator name</Text>
+          <Text style={styles.nameFont}>{data.data.name}</Text>
           <Text style={styles.nameFont2}>type</Text>
-          <Text style={styles.nameFont2}>service / product</Text>
+          <Text style={styles.nameFont2}>{data.data.type}</Text>
         </View>
         <View style={{ flex: 0.25, borderRadius: 20, alignItems: "center" }}>
           <IconButton
