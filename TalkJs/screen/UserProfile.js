@@ -88,7 +88,7 @@ export default function Profile({ route, navigation }) {
                 </View>
                 <Text style={styles.name}>JOHN DOE USERNAME</Text>
                 <Text style={styles.pos}>USER PROFILE EMAIL</Text>
-                <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                     <Button mode="contained" onPress={() => setEditModalOpen(true)}>Edit profile</Button>
                     <Button mode="contained" onPress={() => navigation.navigate('Chat')}>Chat</Button>
                 </View>
