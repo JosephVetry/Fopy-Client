@@ -1,22 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { WebView } from 'react-native-webview';
 import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import axios from 'axios'
-const BASE_URL = 'http://localhost:3000/midtrans'
 
-export default function Midtrans({ route }) {
-  const [number, onChangeNumber] = React.useState('');
-  console.log(route.params.amount);
-  useEffect(() => {
-    const { data } = axios.post(BASE_URL)
-    onChangeNumber(data.redirect_url)
-    console.log(data);
-  }, [])
+export default function Midtrans({ route, navigation }) {
+  const url = route.params.url;
+
   return (
     <WebView
       style={styles.container}
-      source={{ uri: 'https://app.sandbox.midtrans.com/snap/v3/redirection/de4e4ee3-5b53-416b-9abb-e6575f2a44d8#/payment-list' }}
+      onError={() => {
+        console.log(`cukuppp`);
+      }}
+      onLoadStart={() => {
+        console.log(`wkwkwkw`);
+      }}
+      source={{
+        uri: url,
+      }}
+      onNavigationStateChange={(navState) => {
+        if (navState.url.includes('status_code=200')) {
+          let firstSplit = navState.url.split('order_id=');
+          let secondSplit = firstSplit[1].split('&');
+          navigation.navigate('UserProfile', {
+            paymentMessage:
+              'Pembayaran dengan id ' + secondSplit[0] + ' berhasil',
+          });
+          console.log('Pembayaran dengan id ' + secondSplit[0] + ' berhasil');
+        }
+      }}
     />
   );
 }
