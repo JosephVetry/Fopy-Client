@@ -47,7 +47,6 @@ export default function Topup({ setModalOpen }) {
                             onChangeText={onChangeNumber}
                             value={number}
                             keyboardType="numeric"
-                        // name={amount}
                         />
                         <View style={{ alignItems: 'center', marginTop: 5 }}>
                             <Button
