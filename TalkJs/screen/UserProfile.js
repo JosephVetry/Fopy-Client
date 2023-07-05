@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, FlatList, Modal, Alert, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Modal, Pressable } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import Topup from '../components/TopUp';
 import EditForm from '../components/EditForm';
@@ -130,10 +130,10 @@ export default function Profile({ route, navigation }) {
                 <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
                     <Button mode='contained' onPress={() => setTopupModalOpen(true)}>Topup History</Button>
                 </View>
-                <Modal visible={topupModalOpen}>
-                    <View style={{ flex: 0.65, alignItems: 'center' }}>
+                <Modal visible={topupModalOpen} style={{backgroundColor:'green'}}>
+                    <View style={{ alignItems: 'center' }}>
                         <TopupHistory />
-                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <View style={{  marginTop: 20 }}>
                             <Button mode="contained" onPress={() => setTopupModalOpen(false)}>Back</Button>
                         </View>
                     </View>
@@ -142,9 +142,9 @@ export default function Profile({ route, navigation }) {
                     <Button mode='contained' onPress={() => setOrderModalOpen(true)}>Order History</Button>
                 </View>
                 <Modal visible={orderModalOpen}>
-                    <View style={{ flex: 0.65, alignItems: 'center' }}>
+                    <View style={{ alignItems: 'center' }}>
                         <OrderHistory />
-                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <View style={{marginTop: 20 }}>
                             <Button mode="contained" onPress={() => setOrderModalOpen(false)}>Back</Button>
                         </View>
                     </View>

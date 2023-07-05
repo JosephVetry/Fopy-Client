@@ -8,6 +8,7 @@ import Midtrans from './screen/Midtrans';
 import DriverLogin from './screen/DriverLogin';
 import DriverOrderList from './screen/DriverOrderList';
 import DriverChat from './screen/DriverChat';
+import User2Driver from './screen/User2DriverChat';
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
         <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="Midtrans" component={Midtrans} />
         <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="User2Driver" component={User2Driver}/>
         {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/>
         <Stack.Screen name='DriverOrderList' component={DriverOrderList}/>
         <Stack.Screen name='DriverChat' component={DriverChat}/> */}
