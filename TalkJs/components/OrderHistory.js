@@ -1,54 +1,71 @@
 import {
-    StyleSheet, Button, View, Text, TextInput, ScrollView
+    StyleSheet, View, Text, ScrollView, Dimensions
 } from 'react-native';
-import { Card } from 'react-native-paper';
+import { Divider, Card, Button } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
-
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios'
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+import { useNavigation } from '@react-navigation/core';
+const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getOrder'
 
 export default function OrderHistory() {
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'Order History Here',
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Second Item',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Third Item',
-        },
-        {
-            id: '4b81341b-4089-4327-80fd-0fd32f8a3e61',
-            title: 'Fourth Item',
-        },
-        {
-            id: '86707545-7baf-4782-9b7c-3921f0b2578b',
-            title: 'Fifth Item',
-        },
-        {
-            id: 'e4d1c79f-df38-47de-9b37-817fe67c48c5',
-            title: 'Sixth Item',
-        },
-    ];
-
+    const [getOrderHistoryState, setOrderHistoryState] = useState([])
+    const navigation = useNavigation()
+    async function getOrderHistory() {
+        try {
+            const value = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: BASE_URL,
+                method: 'GET',
+                headers: {
+                    access_token: value
+                }
+            })
+            setOrderHistoryState(Array.isArray(data) ? data : []);
+            return data
+        } catch (error) {
+            console.log(error, `Order error????`);
+        }
+    }
+    useEffect(() => {
+        AsyncStorage.setItem("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImFsZXgwMSIsImlhdCI6MTY4ODU0MDQ5MX0.q5J6wRBxhfnMM7NjX2ni0t7EYBe92qXvtsFO_S-6uvU");
+        getOrderHistory()
+    }, [])
     return (
-        <View style={[styles.container, { flexDirection: 'column', },]}>
-            <View style={{ flex: 1 }} />
-            <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center' }}>
+        <View style={[styles.container]}>
+            <View style={{ width: windowWidth }} />
+            <View >
                 <Card mode='elevated'>
                     <Card.Content>
-                        <Text style={{ fontSize: 15, textAlign: 'center' }}>Order History</Text>
-                        <View style={{ margin: 5, height: 100 }}>
+                        <Text style={{ fontSize: 30, textAlign: 'center' }}>Order History</Text>
+                        <Divider bold={true} />
+                        <View style={{ margin: 5, height: 300 }}>
                             <ScrollView style={{ height: 100 }} showsVerticalScrollIndicator={true}>
-                                {DATA.map((el) => {
+                                {getOrderHistoryState.map((el) => {
+                                    // console.log(el);
                                     return (
-                                        <View key={el.id}>
+                                        <View key={el.id} >
                                             <Text style={{ fontSize: 20 }}>{el.title}</Text>
+                                            {el.OrderDetails.map((order) => (
+                                                <View key={order.id}>
+                                                    <Text>Order ID: {order.OrderId}</Text>
+                                                    <Text>Service Name: {order.Service.name}</Text>
+                                                    <Text>Quantity: {order.quantity}</Text>
+                                                    <Text>Price: {el.totalPrice}</Text>
+                                                    <Text>Description: {order.Service.description}</Text>
+                                                    <Text>Order Status: {el.orderStatus}</Text>
+
+                                                    <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
+                                                        <Button mode="contained" onPress={() => { console.log('Go to map');}}>Track</Button>
+                                                        <Button mode="contained" onPress={() => {console.log('Chat between user and driver');}}>Chat</Button>
+                                                    </View>
+                                                </View>
+                                            ))}
+                                            <Divider />
                                         </View>
-                                    )
+                                    );
                                 })}
                             </ScrollView>
                         </View>
@@ -61,8 +78,7 @@ export default function OrderHistory() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-
+        width: windowWidth,
     },
     input: {
         height: 40,

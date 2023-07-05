@@ -1,43 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, FlatList, Modal, Alert, ScrollView, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Image, Modal, Pressable, Alert } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import Topup from '../components/TopUp';
 import EditForm from '../components/EditForm';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import TopupHistory from '../components/TopUpHistory';
 import OrderHistory from '../components/OrderHistory';
+import axios from 'axios'
 
+const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getUser'
 const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
 export default function Profile({ route, navigation }) {
 
-    const DATA = [
-        {
-            id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-            title: 'Top Up History Here',
-        },
-        {
-            id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-            title: 'Second Item',
-        },
-        {
-            id: '58694a0f-3da1-471f-bd96-145571e29d72',
-            title: 'Third Item',
-        },
-        {
-            id: '4b81341b-4089-4327-80fd-0fd32f8a3e61',
-            title: 'Fourth Item',
-        },
-        {
-            id: '86707545-7baf-4782-9b7c-3921f0b2578b',
-            title: 'Fifth Item',
-        },
-        {
-            id: 'e4d1c79f-df38-47de-9b37-817fe67c48c5',
-            title: 'Sixth Item',
-        },
-    ];
+    const [getUserState, setUserState] = useState({})
     const Item = ({ title }) => (
         <View style={styles.item}>
             <Text style={styles.title}>{title}</Text>
@@ -50,13 +28,45 @@ export default function Profile({ route, navigation }) {
     const [orderModalOpen, setOrderModalOpen] = useState(false)
     const [msg, setMsg] = useState('');
 
+    async function getUser() {
+        try {
+            const value = await AsyncStorage.getItem("access_token");
+            const { data } = await axios({
+                url: BASE_URL,
+                method: 'GET',
+                headers: {
+                    access_token: value
+                }
+            })
+            // setUserState(Array.isObject(data) ? data : []);
+            setUserState(data)
+            console.log(data, `<<<<<<<<<<<<<<`);
+            return data
+        } catch (error) {
+            console.log(error, `axios errro?`);
+        }
+    }
+    useEffect(() => {
+        // if (route.params) {
+        //     setMsg(route.params.paymentMessage + '!');
+        //     setModalVisible(true);
+        //     route.params = null;
+        // }
+        AsyncStorage.setItem("access_token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImFsZXgwMSIsImlhdCI6MTY4ODU0MDQ5MX0.q5J6wRBxhfnMM7NjX2ni0t7EYBe92qXvtsFO_S-6uvU")
+        getUser()
+    }, []);
+
+
     useEffect(() => {
         if (route.params) {
+            getUser()
             setMsg(route.params.paymentMessage + '!');
             setModalVisible(true);
             route.params = null;
+
+            // Alert.alert(msg)
         }
-    });
+    }, [route.params])
 
     if (msg) {
         return (
@@ -79,16 +89,17 @@ export default function Profile({ route, navigation }) {
         );
     }
     return (
-        // <ScrollView>
         <View style={[styles.container, { flexDirection: 'column', },]}>
-            <View style={{ flex: 0.25, backgroundColor: '#5271FF' }} />
-            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#5271FF' }}>
+            <View style={{ flex: 0.1, backgroundColor: '#5271FF' }} />
+            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#5271FF', }}>
                 <View style={styles.profilepicWrap}>
-                    <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
+                    <Image style={styles.tinyLogo} source={{ uri: `https://api.dicebear.com/6.x/initials/png?seed=${getUserState.username}` }} />
                 </View>
-                <Text style={styles.name}>JOHN DOE USERNAME</Text>
-                <Text style={styles.pos}>USER PROFILE EMAIL</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                <View key={getUserState.id}>
+                    <Text style={styles.name}>{getUserState.username}</Text>
+                    <Text style={styles.pos}>{getUserState.email}</Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
                     <Button mode="contained" onPress={() => setEditModalOpen(true)}>Edit profile</Button>
                     <Button mode="contained" onPress={() => navigation.navigate('Chat')}>Chat</Button>
                 </View>
@@ -108,7 +119,7 @@ export default function Profile({ route, navigation }) {
                     <Card mode='elevated'>
                         <Card.Content>
                             <Text style={{ fontSize: 24, textAlign: 'center' }}>Balance</Text>
-                            <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. 0</Text>
+                            <Text style={{ fontSize: 18, textAlign: 'center' }}>Rp. {getUserState.balance}</Text>
                         </Card.Content>
                         <View style={{ alignItems: 'center', marginTop: 5, marginBottom: 5 }}>
                             <Card.Actions>
@@ -130,10 +141,10 @@ export default function Profile({ route, navigation }) {
                 <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
                     <Button mode='contained' onPress={() => setTopupModalOpen(true)}>Topup History</Button>
                 </View>
-                <Modal visible={topupModalOpen}>
-                    <View style={{ flex: 0.65, alignItems: 'center' }}>
+                <Modal visible={topupModalOpen} style={{ backgroundColor: 'green' }}>
+                    <View style={{ alignItems: 'center' }}>
                         <TopupHistory />
-                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <View style={{ marginTop: 20 }}>
                             <Button mode="contained" onPress={() => setTopupModalOpen(false)}>Back</Button>
                         </View>
                     </View>
@@ -142,9 +153,9 @@ export default function Profile({ route, navigation }) {
                     <Button mode='contained' onPress={() => setOrderModalOpen(true)}>Order History</Button>
                 </View>
                 <Modal visible={orderModalOpen}>
-                    <View style={{ flex: 0.65, alignItems: 'center' }}>
+                    <View style={{ alignItems: 'center' }}>
                         <OrderHistory />
-                        <View style={{ alignItems: 'center', marginTop: 20 }}>
+                        <View style={{ marginTop: 20 }}>
                             <Button mode="contained" onPress={() => setOrderModalOpen(false)}>Back</Button>
                         </View>
                     </View>
@@ -213,5 +224,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
-      },
+    },
 });

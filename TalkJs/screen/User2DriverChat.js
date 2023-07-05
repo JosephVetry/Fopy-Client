@@ -1,17 +1,16 @@
 // import React from 'react';
 import * as TalkRn from '@talkjs/expo';
 
-function DriverChat(props) {
+function User2Driver(props) {
     // me = orang yg login, req.user.id
     const me = {
-        id: 'FOPY-driver-1',
-        name: 'FOPY Drivers 1',
+        id: 'FOPY-user-1',
+        name: 'FOPY User 1',
     };
 
     const other = {
-        // mitra yang dipilih (fetch id si admin atau mitra)
-        id: 'FOPY-user-1',
-        name: 'FOPY User 1',
+        id: 'FOPY-driver-1',
+        name: 'FOPY Drivers 1',
     };
 
     const conversationBuilder = TalkRn.getConversationBuilder(
@@ -27,4 +26,4 @@ function DriverChat(props) {
         </TalkRn.Session>
     );
 }
-export default DriverChat
+export default User2Driver
