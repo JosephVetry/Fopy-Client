@@ -38,7 +38,7 @@ export default {
         });
         console.log(data);
         await this.fetchOrderByMitra();
-        this.$router.push("/services/list");
+        this.$router.push("/transactions/all");
         Swal.fire(data.message);
       } catch (error) {
         console.log(error);

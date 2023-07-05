@@ -27,12 +27,12 @@ export default {
   created() {
     if (this.role === "admin") {
       this.title = localStorage.getItem("title") || "Mitra";
-      this.secondTitle = localStorage.getItem("secondTitle") || "Add Mitra!";
+      this.secondTitle = localStorage.getItem("secondTitle") || "Add Mitra";
       this.thirdTitle = localStorage.getItem("thirdTitle") || "List Mitra";
       this.mitraName = localStorage.getItem("mitraName");
     } else {
-      this.title = localStorage.getItem("title") || "Drivers!";
-      this.secondTitle = localStorage.getItem("secondTitle") || "Add Driver!";
+      this.title = localStorage.getItem("title") || "Drivers";
+      this.secondTitle = localStorage.getItem("secondTitle") || "Add Driver";
       this.thirdTitle = localStorage.getItem("thirdTitle") || "List Driver";
       this.mitraName = localStorage.getItem("mitraName");
     }
@@ -80,8 +80,7 @@ export default {
             />
           </svg>
         </div>
-        <p class="text-sm font-light uppercase">
-          Dashboard
+        <p class="text-sm font-light uppercase">Admin Panel
           <span class="text-base block font-bold tracking-widest"> Fopy </span>
         </p>
       </a>
@@ -180,7 +179,7 @@ export default {
           </ul>
         </li>
 
-        <li class="relative" x-data="{ open: false }">
+        <li v-if="role === 'mitra'" class="relative" x-data="{ open: false }">
           <a
             x-on:click="open = !open"
             x-on:click.outside="open = false"
@@ -212,6 +211,7 @@ export default {
           >
             <li>
               <router-link
+                v-if="role === 'mitra'"
                 to="/services/add"
                 class="p-4 block text-sm text-gray-600 rounded flex items-center gap-2 hover:bg-gray-100"
               >
@@ -234,6 +234,7 @@ export default {
             </li>
             <li>
               <router-link
+                v-if="role === 'mitra'"
                 to="/services/list"
                 class="p-4 block text-sm text-gray-600 rounded flex items-center gap-2 hover:bg-gray-100"
               >
@@ -258,7 +259,7 @@ export default {
         </li>
       </ul>
       <ul class="flex items-center gap-6">
-        <li>
+        <li v-if="role === 'mitra'">
           <router-link to="/inbox">
             <div class="p-2 rounded hover:bg-gray-200">
               <svg

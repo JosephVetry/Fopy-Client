@@ -25,7 +25,7 @@ export default {
     await Talk.ready;
     // me = admin yg login
     const me = new Talk.User({
-      id: "FOPY-" + localStorage.id,
+      id: "FOPY-Admin-" + localStorage.id,
       name: "FOPY Admin " + localStorage.id,
     });
 
@@ -37,28 +37,28 @@ export default {
     // user yg ngechat
     const other = new Talk.User(
       {
-        id: "FOPY-user-1",
-        name: "FOPY User 1",
+        id: "User-1",
+        name: "User 1",
       },
       {
-        id: "FOPY-user-2",
-        name: "FOPY User 2",
+        id: "User-2",
+        name: "User 2",
       },
       {
-        id: "FOPY-user-3",
-        name: "FOPY User 3",
+        id: "User-3",
+        name: "User 3",
       },
       {
-        id: "FOPY-user-4",
-        name: "FOPY User 4",
+        id: "User-4",
+        name: "User 4",
       },
       {
-        id: "FOPY-user-5",
-        name: "FOPY User 5",
+        id: "User-5",
+        name: "User 5",
       },
       {
-        id: "FOPY-user-6",
-        name: "FOPY User 6",
+        id: "User-6",
+        name: "User 6",
       }
     );
 
