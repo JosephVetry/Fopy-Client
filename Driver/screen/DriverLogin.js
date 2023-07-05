@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 export default function DriverLogin({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('david.johnson@example.com');
+  const [password, setPassword] = useState('password789');
 
   const handleLogin = async () => {
     try {
@@ -19,6 +19,7 @@ export default function DriverLogin({ navigation }) {
 
       await AsyncStorage.setItem('userId', id.toString());
       await AsyncStorage.setItem('accessToken', access_token);
+      // console.log(acc)
 
       navigation.navigate('DriverOrderList');
     } catch (error) {
@@ -40,7 +41,7 @@ export default function DriverLogin({ navigation }) {
       <View style={[styles.container, { flexDirection: 'column' }]}>
         <Image
           style={styles.tinyLogo}
-          source={require('../assets/fopy.png')}
+          source={require('../assets/images/bike.png')}
         />
         <Separator />
         <Text style={styles.title}>

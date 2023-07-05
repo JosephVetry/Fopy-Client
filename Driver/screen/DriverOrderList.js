@@ -2,11 +2,15 @@ import * as React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import axios from 'axios';
+import DriverOrderDetail from './DriverOrderDetail';
+import ChatComponent from './DriverChat';
+
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
 
-export default function DriverOrderList() {
+export default function DriverOrderList({ navigation }) {
     const [orders, setOrders] = React.useState([]);
   
     React.useEffect(() => {
@@ -47,7 +51,8 @@ export default function DriverOrderList() {
                   <Text variant="bodyMedium" style={{ margin: 10 }}>{order.address}</Text>
                 </Card.Content>
                 <Card.Actions>
-                  <Button onPress={() => console.log('This goes to map')}>Take Order</Button>
+                  <Button onPress={() => navigation.navigate('ChatComponent', {order})}>Chat</Button>              
+                  <Button onPress={() => navigation.navigate('DriverOrderDetail', { order })}>Take order</Button>                    
                 </Card.Actions>
               </Card>
             </View>
