@@ -40,7 +40,7 @@ export default function Profile({ route, navigation }) {
             })
             // setUserState(Array.isObject(data) ? data : []);
             setUserState(data)
-            console.log(data, `<<<<<<<<<<<<<<`);
+            // console.log(data, `<<<<<<<<<<<<<<`);
             return data
         } catch (error) {
             console.log(error, `axios errro?`);
@@ -90,12 +90,12 @@ export default function Profile({ route, navigation }) {
     }
     return (
         <View style={[styles.container, { flexDirection: 'column', },]}>
-            <View style={{ flex: 0.1, backgroundColor: '#5271FF' }} />
-            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#5271FF', }}>
+            <View style={{ flex: 0.2, backgroundColor: '#CAF0F8' }} />
+            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#CAF0F8', }}>
                 <View style={styles.profilepicWrap}>
                     <Image style={styles.tinyLogo} source={{ uri: `https://api.dicebear.com/6.x/initials/png?seed=${getUserState.username}` }} />
                 </View>
-                <View key={getUserState.id}>
+                <View key={getUserState.id} style={{marginBottom: 15, justifyContent:'center'}}>
                     <Text style={styles.name}>{getUserState.username}</Text>
                     <Text style={styles.pos}>{getUserState.email}</Text>
                 </View>

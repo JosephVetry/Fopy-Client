@@ -4,7 +4,6 @@ import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import axios from 'axios'
 const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getUser'
-const BASE_URL_2 = ''
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 

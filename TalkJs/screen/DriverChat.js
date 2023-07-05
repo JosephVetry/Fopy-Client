@@ -4,13 +4,13 @@ import * as TalkRn from '@talkjs/expo';
 function DriverChat(props) {
     // me = orang yg login, req.user.id
     const me = {
-        id: 'FOPY-driver-1',
+        id: 'FOPY-Driver-1',
         name: 'FOPY Drivers 1',
     };
 
     const other = {
         // mitra yang dipilih (fetch id si admin atau mitra)
-        id: 'FOPY-user-1',
+        id: 'FOPY-User-1',
         name: 'FOPY User 1',
     };
 
