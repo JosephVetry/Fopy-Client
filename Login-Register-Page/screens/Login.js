@@ -5,14 +5,26 @@ import COLORS from '../constants/colors';
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox"
 import Button from '../components/Button';
+import userLogin from '../store/action';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = ({ navigation }) => {
     const [isPasswordShown, setIsPasswordShown] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
-    
+    const [dataInput, setDataInput] = React.useState({
+        email : '',
+        password : ''
+    })
+    const dispatch = useDispatch()
+
+    const submitData = () =>{
+        dispatch(userLogin(dataInput))
+    }
+
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
-            <View style={{ flex: 1, marginHorizontal: 22 }}>
+            <View style={{ flex: 1, marginHorizontal: 22, marginTop : 40 }}>
                 <View style={{ marginVertical: 22 }}>
                     <Text style={{
                         fontSize: 22,
@@ -53,6 +65,9 @@ const Login = ({ navigation }) => {
                             style={{
                                 width: "100%"
                             }}
+                            onChangeText={(text) => setDataInput({...dataInput, email : text})}
+                            value={dataInput.email}
+                            name='email'
                         />
                     </View>
                 </View>
@@ -81,6 +96,8 @@ const Login = ({ navigation }) => {
                             style={{
                                 width: "100%"
                             }}
+                            onChangeText={(text)=>{ setDataInput({...dataInput, password : text})}}
+                            value={dataInput.password}
                         />
 
                         <TouchableOpacity
@@ -109,85 +126,14 @@ const Login = ({ navigation }) => {
                         marginTop: 18,
                         marginBottom: 4,
                     }}
+                    onPress={submitData}
                 />
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 20 }}>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                    <Text style={{ fontSize: 14 }}>Or Login with</Text>
-                    <View
-                        style={{
-                            flex: 1,
-                            height: 1,
-                            backgroundColor: COLORS.grey,
-                            marginHorizontal: 10
-                        }}
-                    />
-                </View>
 
                 <View style={{
                     flexDirection: 'row',
                     justifyContent: 'center'
                 }}>
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.grey,
-                            marginRight: 4,
-                            borderRadius: 10
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/facebook.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
 
-                        <Text>Facebook</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() => console.log("Pressed")}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'row',
-                            height: 52,
-                            borderWidth: 1,
-                            borderColor: COLORS.grey,
-                            marginRight: 4,
-                            borderRadius: 10
-                        }}
-                    >
-                        <Image
-                            source={require("../assets/google.png")}
-                            style={{
-                                height: 36,
-                                width: 36,
-                                marginRight: 8
-                            }}
-                            resizeMode='contain'
-                        />
-
-                        <Text>Google</Text>
-                    </TouchableOpacity>
                 </View>
 
                 <View style={{

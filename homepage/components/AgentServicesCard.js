@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,13 +15,58 @@ import { Icon, IconButton } from "@react-native-material/core";
 import { Madoka } from "react-native-textinput-effects";
 import * as DocumentPicker from "expo-document-picker";
 import { TextInput } from "@react-native-material/core";
+import { addUserOrder } from "../store/action";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 export default function AgentServicesCard(data) {
   const [modalVisible, setModalVisible] = useState(false);
   const [singleFile, setSingleFile] = useState(null);
-  let orders = []
+  const [page, setPage] = useState({
+    firstPage: 0,
+    lastPage: 0,
+  });
 
+  const dispatch = useDispatch();
+  const [total, setTotal] = useState(0);
 
+  const [formData, setFormData] = useState({
+    order: {
+      AdministratorId: 0,
+      location: "POINT(107.5  9278847659893 -6.942981263106864)",
+      deliveryMethod: "Delivery",
+    },
+    products: {
+      ServiceId: 0,
+      quantity: 0,
+      totalPage: 0,
+      url: "",
+    },
+  });
+
+  const submitData = () => {
+    dispatch(
+      addUserOrder({
+        ...formData,
+        order: {
+          ...formData.order,
+          AdministratorId: data.data.AdministratorId,
+        },
+        products: {
+          ...formData.products,
+          quantity: total,
+          ServiceId: data.data.id,
+          totalPage: total,
+          url: singleFile,
+        },
+      })
+    );
+  };
+
+  useEffect(() => {
+    let totalPage = page.lastPage - page.firstPage + 1;
+    setTotal(totalPage);
+  }, [page]);
 
   return (
     <View style={styles.container}>
@@ -50,37 +95,101 @@ export default function AgentServicesCard(data) {
               borderTopEndRadius: 20,
             }}
           >
-            <View style ={{justifyContent : 'center', alignItems : 'center'}}>
-            <Text style={{fontSize : 20, marginTop  : 10}}>
-              {data.data.name}
-            </Text>
+            <View style={{ justifyContent: "center", alignItems: "center" }}>
+              <Text style={{ fontSize: 20, marginTop: 10 }}>
+                {data.data.name}
+              </Text>
             </View>
-             <TextInput keyboardType="numeric" variant="standard"  style={{ margin: 16, borderColor : 'black' }} />            
+            <TextInput
+              keyboardType="numeric"
+              variant="standard"
+              style={{ margin: 16, borderColor: "black" }}
+              placeholder="Quantity"
+              onChangeText={(text) =>
+                setFormData({
+                  ...formData,
+                  products: {
+                    ...formData.products,
+                    quantity: parseInt(text) || 0,
+                  },
+                })
+              }
+              name="quantity"
+            />
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  keyboardType="numeric"
+                  variant="standard"
+                  style={{ margin: 16, borderColor: "black" }}
+                  placeholder="First Page"
+                  value={page.firstPage}
+                  onChangeText={(text) =>
+                    setPage({
+                      ...page,
+                      firstPage: text,
+                    })
+                  }
+                  name="firstPage"
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <TextInput
+                  keyboardType="numeric"
+                  variant="standard"
+                  style={{ margin: 16, borderColor: "black" }}
+                  placeholder="Last Page"
+                  value={page.lastPage}
+                  onChangeText={(text) =>
+                    setPage({
+                      ...page,
+                      lastPage: text,
+                    })
+                  }
+                  name="lastPage"
+                />
+              </View>
+            </View>
 
             <TouchableOpacity
               style={styles.buttonStyle}
               activeOpacity={0.5}
-              onPress={()=>{
+              onPress={() => {
                 DocumentPicker.getDocumentAsync({
-                  type : '*/*'
+                  type: "*/*",
                 })
-                .then(result=>{
+                  .then(async (result) => {
+                    const body = new FormData();
+                    body.append("upload_preset", "fopystore");
+                    body.append("api_key", "129267115242897");
+                    body.append("file", {
+                      uri: result.uri,
+                      type: result.mimeType,
+                      name: result.name
+                    });
 
-                  orders.push(result)
-                  console.log(orders)
-                })
-                .catch(err=>{
-                  console.log(err)
-                })
+                    const { data } = await axios.post(
+                      "https://api.cloudinary.com/v1_1/dle6zrtgg/auto/upload",
+                      body,
+                    
+                      {
+                        headers: {
+                          "Content-Type": "multipart/form-data",
+                        },
+                      }
+                    );
+                    setSingleFile(data.secure_url);
+                  })
+                  .catch((err) => {
+                    console.log(err.response.data);
+                  });
               }}
             >
               <Text style={styles.buttonTextStyle}>Add File</Text>
             </TouchableOpacity>
           </View>
-          <View style ={{backgroundColor : '#DFE9F4', flex : 0.29}}>
-          <Text>
-              *per lembar price : {data.data.price}
-            </Text>
+          <View style={{ backgroundColor: "#DFE9F4", flex: 0.29 }}>
+            <Text>*per lembar price : {data.data.price}</Text>
           </View>
           <View
             style={{
@@ -91,7 +200,6 @@ export default function AgentServicesCard(data) {
               flexDirection: "row",
             }}
           >
-
             <View style={{ flex: 1 }}>
               <Pressable
                 style={[styles.buttonClose]}
@@ -103,7 +211,9 @@ export default function AgentServicesCard(data) {
             <View style={{ flex: 1 }}>
               <Pressable
                 style={[styles.buttonClose]}
-                onPress={() => console.log("masukin ke keranjang")}
+                onPress={() => {
+                  submitData();
+                }}
               >
                 <Text style={styles.textStyle2}>Submit</Text>
               </Pressable>

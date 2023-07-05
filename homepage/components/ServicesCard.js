@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 import { Icon, IconButton } from "@react-native-material/core";
 import { useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import {showMitraService} from '../store/action'
 
 
 const ServicesCard = ({data, navigation}) => {
+
   const dispatch = useDispatch()
   return (
     <View style={styles.cardContainer}>
