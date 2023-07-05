@@ -4,7 +4,7 @@ import { Avatar, Button, Card, Text } from 'react-native-paper';
 
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />;
 
-export default function DriverOrderList() {
+export default function DriverOrderList({navigation}) {
     return (
         <View
             style={[
@@ -21,6 +21,7 @@ export default function DriverOrderList() {
                             <Text variant="bodyMedium" style={{ margin: 10 }}>Address: Jl. Arteri Pd. Indah No.7, RT.5/RW.9, Kby. Lama Sel., Kec. Kby. Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12240, Indonesia</Text>
                         </Card.Content>
                         <Card.Actions>
+                        <Button mode="contained" onPress={() => navigation.navigate('DriverChat')}>Chat</Button>
                             <Button onPress={() => console.log('This goes to map')}>Take Order</Button>
                         </Card.Actions>
                     </Card>

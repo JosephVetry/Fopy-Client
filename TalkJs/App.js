@@ -7,6 +7,9 @@ import UserProfile from './screen/UserProfile'
 import Midtrans from './screen/Midtrans';
 import DriverLogin from './screen/DriverLogin';
 import DriverOrderList from './screen/DriverOrderList';
+import DriverChat from './screen/DriverChat';
+
+
 
 const Stack = createNativeStackNavigator()
 function DetailsScreen() {
@@ -20,11 +23,12 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false }} />
-        <Stack.Screen name="Chat" component={Chat} />
+        <Stack.Screen name="UserProfile" component={UserProfile} />
         <Stack.Screen name="Midtrans" component={Midtrans} />
+        <Stack.Screen name="Chat" component={Chat} />
         {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/>
-        <Stack.Screen name='DriverOrderList' component={DriverOrderList}/> */}
+        <Stack.Screen name='DriverOrderList' component={DriverOrderList}/>
+        <Stack.Screen name='DriverChat' component={DriverChat}/> */}
       </Stack.Navigator>
       {/* <StatusBar style="auto" /> */}
     </NavigationContainer>
@@ -34,6 +38,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // padding: 20,
   },
 });
