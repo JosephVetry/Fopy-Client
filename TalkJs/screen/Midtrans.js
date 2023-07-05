@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 
 export default function Midtrans({ route, navigation }) {
   const url = route.params.url;
+  console.log(url, `url in Midtrans`);
 
   return (
     <WebView

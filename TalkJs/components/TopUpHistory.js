@@ -62,7 +62,6 @@ export default function TopupHistory() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     input: {
         height: 40,

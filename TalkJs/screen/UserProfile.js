@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ImageBackground, FlatList, Modal, Alert, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ImageBackground, FlatList, Modal, Alert, ScrollView, Pressable } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import Topup from '../components/TopUp';
 import EditForm from '../components/EditForm';
@@ -81,8 +81,8 @@ export default function Profile({ route, navigation }) {
     return (
         // <ScrollView>
         <View style={[styles.container, { flexDirection: 'column', },]}>
-            <View style={{ flex: 0.25, backgroundColor: '#90e0ef' }} />
-            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#90e0ef' }}>
+            <View style={{ flex: 0.25, backgroundColor: '#5271FF' }} />
+            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#5271FF' }}>
                 <View style={styles.profilepicWrap}>
                     <Image style={styles.tinyLogo} source={{ uri: 'https://m.media-amazon.com/images/I/81Hj1wcXL-L.png' }} />
                 </View>
@@ -120,7 +120,7 @@ export default function Profile({ route, navigation }) {
                 <View>
                     <Modal visible={modalOpen}>
                         <View style={{ flex: 0.65, alignItems: 'center' }}>
-                            <Topup />
+                            <Topup setModalOpen={setModalOpen} />
                             <View style={{ alignItems: 'center', marginTop: 20 }}>
                                 <Button mode="contained" onPress={() => setModalOpen(false)}>Back</Button>
                             </View>
@@ -208,4 +208,10 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 20,
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 22,
+      },
 });

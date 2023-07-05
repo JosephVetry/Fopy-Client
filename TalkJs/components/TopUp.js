@@ -3,13 +3,13 @@ import { Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-const BASE_URL = 'http://localhost:3000/user/midtrans';
+const BASE_URL = 'https://756a-139-228-111-126.ngrok-free.app/user/midtrans';
 
 export default function Topup({ setModalOpen }) {
     const [number, onChangeNumber] = React.useState('');
     const navigation = useNavigation();
 
-    async function fetchMidtrans() {
+    async function fetchMidtrans(number) {
         try {
             const { data } = await axios({
                 url: BASE_URL,
@@ -28,6 +28,7 @@ export default function Topup({ setModalOpen }) {
             console.log(error, `kbhdfakfjkn <<<<<<`);
         }
     }
+    
     useEffect(() => {
         console.log(number);
     })
@@ -54,8 +55,11 @@ export default function Topup({ setModalOpen }) {
                                 onPress={() => {
                                     // gue tambahin
                                     fetchMidtrans(number).then((url) => {
+                                        console.log(number, `this is number here`);
+                                        console.log(url, `url di topup`);
                                         setModalOpen(false);
                                         navigation.navigate('Midtrans', { url });
+                                        console.log(navigation, url, `<<< k`)
                                     });
                                 }}
                             />
