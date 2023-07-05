@@ -24,13 +24,13 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="UserProfile" component={UserProfile} />
-        <Stack.Screen name="Midtrans" component={Midtrans} />
-        <Stack.Screen name="Chat" component={Chat} />
-        <Stack.Screen name="User2Driver" component={User2Driver}/>
-        {/* <Stack.Screen name='DriverLogin' component={DriverLogin}/>
+        {/* <Stack.Screen name="UserProfile" component={UserProfile} options={{ headerShown: false }}/>
+        <Stack.Screen name="Midtrans" component={Midtrans} options={{ headerShown: false }}/>
+        <Stack.Screen name="Chat" component={Chat} options={{ headerShown: false }}/>
+        <Stack.Screen name="User2Driver" component={User2Driver} options={{ headerShown: false }}/> */}
+        <Stack.Screen name='DriverLogin' component={DriverLogin}/>
         <Stack.Screen name='DriverOrderList' component={DriverOrderList}/>
-        <Stack.Screen name='DriverChat' component={DriverChat}/> */}
+        <Stack.Screen name='DriverChat' component={DriverChat}/>
       </Stack.Navigator>
       {/* <StatusBar style="auto" /> */}
     </NavigationContainer>

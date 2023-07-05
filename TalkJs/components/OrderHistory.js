@@ -44,7 +44,6 @@ export default function OrderHistory() {
                         <View style={{ margin: 5, height: 300 }}>
                             <ScrollView style={{ height: 100 }} showsVerticalScrollIndicator={true}>
                                 {getOrderHistoryState.map((el) => {
-                                    // console.log(el);
                                     return (
                                         <View key={el.id} >
                                             <Text style={{ fontSize: 20 }}>{el.title}</Text>
@@ -58,8 +57,8 @@ export default function OrderHistory() {
                                                     <Text>Order Status: {el.orderStatus}</Text>
 
                                                     <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
-                                                        <Button mode="contained" onPress={() => { console.log('Go to map');}}>Track</Button>
-                                                        <Button mode="contained" onPress={() => {console.log('Chat between user and driver');}}>Chat</Button>
+                                                        <Button mode="contained" onPress={() => { console.log('Go to map'); }}>Track</Button>
+                                                        <Button mode="contained" onPress={() => navigation.navigate('User2Driver')}>Chat</Button>
                                                     </View>
                                                 </View>
                                             ))}
