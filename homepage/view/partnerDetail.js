@@ -4,6 +4,7 @@ import AgentServicesCard from '../components/AgentServicesCard';
 import { Button } from '@rneui/themed';
 import { useDispatch, useSelector } from 'react-redux';
 import { showMitraService } from '../store/action';
+import ProductsCard from '../components/ProductCard';
 
 
 export default function AgentDetail({navigation}) {
@@ -16,8 +17,6 @@ export default function AgentDetail({navigation}) {
     return state.services
   })
 
-  console.log("error kata iqbal")
-
   if (services && services.length > 0) {
     return (
       <View
@@ -27,7 +26,7 @@ export default function AgentDetail({navigation}) {
             flexDirection: 'column',
           },
         ]}>
-        <View style={{flex: 2}} />
+
         <View style={styles.cardContainer} >
           <View style = {{flex : 1}}>
   
@@ -44,6 +43,9 @@ export default function AgentDetail({navigation}) {
             )}
             >
             </FlatList>
+          </View>
+          <View style ={{flex : 0.5}}>
+            <ProductsCard />
           </View>
           <View style ={{flex : 0.5, justifyContent : 'center', width : 200,}}>
           <Button onPress={()=>{
@@ -73,11 +75,11 @@ export default function AgentDetail({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor : 'rgba(90, 154, 230, 1)'
+    // backgroundColor : 'rgba(90, 154, 230, 1)'
   },
   cardContainer : {
     flex: 4, 
-    backgroundColor: 'white', 
+    // backgroundColor: 'white', 
     borderTopStartRadius : 20, 
     borderTopEndRadius : 20,
     alignItems : 'center'

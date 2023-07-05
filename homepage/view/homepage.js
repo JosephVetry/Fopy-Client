@@ -41,7 +41,6 @@ export default function HomePage({navigation}) {
             />
           </View>
           <View style={{ flex: 4, justifyContent: "center"}}>
-
           </View>
         </View>
       </View>
@@ -59,7 +58,6 @@ export default function HomePage({navigation}) {
           <ServicesCard data = {item} navigation={navigation}/>
         )}
         >
-
         </FlatList>
       </View>
     </View>
