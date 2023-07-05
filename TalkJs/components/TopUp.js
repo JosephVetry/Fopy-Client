@@ -3,7 +3,7 @@ import { Card } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-const BASE_URL = 'https://756a-139-228-111-126.ngrok-free.app/user/midtrans';
+const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/midtrans';
 
 export default function Topup({ setModalOpen }) {
     const [number, onChangeNumber] = React.useState('');
@@ -25,7 +25,7 @@ export default function Topup({ setModalOpen }) {
             console.log(data, ` <<< data`);
             return data.redirect_url;
         } catch (error) {
-            console.log(error, `kbhdfakfjkn <<<<<<`);
+            console.log(error, `kbhdfakfjkn <<<<s<<`);
         }
     }
     

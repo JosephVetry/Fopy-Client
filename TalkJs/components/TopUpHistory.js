@@ -9,7 +9,7 @@ import axios from 'axios'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const BASE_URL = 'https://756a-139-228-111-126.ngrok-free.app/user/getUser'
+const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getUser'
 
 export default function TopupHistory() {
 
@@ -26,7 +26,7 @@ export default function TopupHistory() {
                 }
             })
             setTopupHistoryState(Array.isArray(data.Topups) ? data.Topups : []);
-            console.log(data);
+            // console.log(data);
             return data
         } catch (error) {
             console.log(error);

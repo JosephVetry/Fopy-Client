@@ -7,11 +7,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios'
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-const BASE_URL = 'https://756a-139-228-111-126.ngrok-free.app/user/getOrder'
+import { useNavigation } from '@react-navigation/core';
+const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getOrder'
 
-export default function OrderHistory({ navigation }) {
+export default function OrderHistory() {
     const [getOrderHistoryState, setOrderHistoryState] = useState([])
-
+    const navigation = useNavigation()
     async function getOrderHistory() {
         try {
             const value = await AsyncStorage.getItem("access_token");
@@ -23,10 +24,9 @@ export default function OrderHistory({ navigation }) {
                 }
             })
             setOrderHistoryState(Array.isArray(data) ? data : []);
-            // console.log(data);
             return data
         } catch (error) {
-            console.log(error);
+            console.log(error, `Order error????`);
         }
     }
     useEffect(() => {
@@ -46,7 +46,7 @@ export default function OrderHistory({ navigation }) {
                                 {getOrderHistoryState.map((el) => {
                                     // console.log(el);
                                     return (
-                                        <View key={el.id}>
+                                        <View key={el.id} >
                                             <Text style={{ fontSize: 20 }}>{el.title}</Text>
                                             {el.OrderDetails.map((order) => (
                                                 <View key={order.id}>
@@ -56,13 +56,11 @@ export default function OrderHistory({ navigation }) {
                                                     <Text>Price: {el.totalPrice}</Text>
                                                     <Text>Description: {order.Service.description}</Text>
                                                     <Text>Order Status: {el.orderStatus}</Text>
-                                                    {/* Render other properties as needed */}
-                                                    {console.log(el, `<<<<<<<<<<<`)}
-                                                    <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
-                                                        <Button mode="contained" onPress={() => { }}>Track</Button>
-                                                        <Button mode="contained" onPress={() => navigation.navigate('User2Driver')}>Chat</Button>
-                                                    </View>
 
+                                                    <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
+                                                        <Button mode="contained" onPress={() => { console.log('Go to map');}}>Track</Button>
+                                                        <Button mode="contained" onPress={() => {console.log('Chat between user and driver');}}>Chat</Button>
+                                                    </View>
                                                 </View>
                                             ))}
                                             <Divider />
