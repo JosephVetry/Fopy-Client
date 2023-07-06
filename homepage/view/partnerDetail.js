@@ -26,7 +26,7 @@ export default function AgentDetail({navigation}) {
             flexDirection: 'column',
           },
         ]}>
-
+        {/* <Text>{JSON.stringify(services[0].Services)}</Text> */}
         <View style={styles.cardContainer} >
           <View style = {{flex : 1}}>
   
@@ -40,7 +40,7 @@ export default function AgentDetail({navigation}) {
             renderItem={({item})=>(
           <AgentServicesCard data = {item}  />
               
-            )}
+              )}
             >
             </FlatList>
           </View>

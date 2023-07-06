@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
+// import { Card } from 'react-native-paper'
 import { Icon, IconButton } from "@react-native-material/core";
 import { useDispatch } from "react-redux";
 import {showMitraService} from '../store/action'
 
 
 const ServicesCard = ({data, navigation}) => {
-
+  
   const dispatch = useDispatch()
   return (
     <View style={styles.cardContainer}>
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowColor: "#90E0EF",
     shadowOffset: {
-      width: 5,
+      width: 2,
       height: 5,
     },
     shadowOpacity: 1,

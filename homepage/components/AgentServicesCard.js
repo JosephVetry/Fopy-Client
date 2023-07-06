@@ -18,6 +18,7 @@ import { TextInput } from "@react-native-material/core";
 import { addUserOrder } from "../store/action";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { calculateTotal } from "../store/action";
 
 export default function AgentServicesCard(data) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -26,9 +27,14 @@ export default function AgentServicesCard(data) {
     firstPage: 0,
     lastPage: 0,
   });
-
+  
   const dispatch = useDispatch();
   const [total, setTotal] = useState(0);
+  const [value, setValue] = useState(0)
+  const [ totalPrice, setTotalPrice] = useState({
+    calculatePrice : 0,
+    serviceName : ''
+  })
 
   const [formData, setFormData] = useState({
     order: {
@@ -54,19 +60,29 @@ export default function AgentServicesCard(data) {
         },
         products: {
           ...formData.products,
-          quantity: total,
           ServiceId: data.data.id,
           totalPage: total,
           url: singleFile,
         },
       })
     );
+    dispatch(
+      calculateTotal({
+        ...totalPrice,
+        calculatePrice : value,
+        serviceName : data.data.name
+      })
+    )
   };
 
   useEffect(() => {
     let totalPage = page.lastPage - page.firstPage + 1;
     setTotal(totalPage);
+    let prices = totalPage * data.data.price * formData.products.quantity
+    setValue(prices)
+
   }, [page]);
+
 
   return (
     <View style={styles.container}>
@@ -110,7 +126,7 @@ export default function AgentServicesCard(data) {
                   ...formData,
                   products: {
                     ...formData.products,
-                    quantity: parseInt(text) || 0,
+                    quantity: text,
                   },
                 })
               }
@@ -213,6 +229,7 @@ export default function AgentServicesCard(data) {
                 style={[styles.buttonClose]}
                 onPress={() => {
                   submitData();
+                  setModalVisible(!modalVisible)
                 }}
               >
                 <Text style={styles.textStyle2}>Submit</Text>
