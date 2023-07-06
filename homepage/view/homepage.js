@@ -6,7 +6,6 @@ import ServicesCard from "../components/ServicesCard";
 import { fetchMitra } from "../store/action";
 import { useDispatch, useSelector } from "react-redux";
 
-
 export default function HomePage({navigation}) {
   const dispatch = useDispatch()
   useEffect(() => {
@@ -16,6 +15,7 @@ export default function HomePage({navigation}) {
   const { mitras } = useSelector((state =>{
     return state
   }))
+
   return (
     <View
       style={[ 

@@ -1,14 +1,22 @@
 import { BASE_URL } from "../config/api";
 import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useNavigation } from "@react-navigation/native";
 
 
 export const fetchMitra = () =>{
     return async(dispatch)=>{
-        try {
+        await AsyncStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImFsZXgwMSIsImlhdCI6MTY4ODYyMDIzOX0.gjnr4FhN8tuNTTrKmqRKyttDfJwjD4RmspD32Zk4t4Y")
+        await AsyncStorage.setItem('balance', "250000")
 
-        const { data } = await axios({
+        try {
+            const value = await AsyncStorage.getItem('access_token')
+            const { data } = await axios({
             url: 'http://10.0.2.2:3000/user/getMitraByUser',
-            method: 'GET'
+            method: 'GET',
+            headers : {
+                access_token : value
+            }
         })
         const action = {
             type : 'fetchMitraSuccess',
@@ -24,11 +32,16 @@ export const fetchMitra = () =>{
 export const showMitraService = (id) =>{
     return async(dispatch) =>{
         try {
+            const value = await AsyncStorage.getItem('access_token')
             const { data } = await axios({
                 url : `http://10.0.2.2:3000/user/getMitraService/${id}`,
-                method : 'GET'
+                method : 'GET',
+                headers : {
+                    access_token : value
+                }
             })
-            const action ={
+ 
+            const action = {
                 type : 'fetchServicesFromMitraSuccess',
                 payload : data
             }
@@ -40,7 +53,6 @@ export const showMitraService = (id) =>{
 }
 
 export const showMitraProduct = (id) =>{
-    console.log(id)
     return async(dispatch) =>{
 
     }
@@ -48,22 +60,14 @@ export const showMitraProduct = (id) =>{
 
 export const addUserOrder = (addForm) =>{
     return async(dispatch) =>{
-        console.log(addForm.products)
-       
 try {
-  
-
-    // console.log(data);
-    console.log("Uploaded")
     const action ={
         type : 'addToCart',
         payload : addForm
     }
-    // console.log(addForm, 'ini di action')
-
     dispatch(action)
 } catch (err) {
-    console.log(err, "<---");
+    console.log(err);
 }
         // kirim ke reducer add formnya 
         // action.payload.order -> userOrder
@@ -72,5 +76,57 @@ try {
         // ganti quantity jadi copy
         // untuk welcome back di ganti jadi welcome, di login page
 
+    }
+}
+
+// export const userLogin = (dataInput) =>{
+//     return async(dispatch) => {
+//         try {
+//             const { data } = await axios ({
+//                 url : `http://10.0.2.2:3000/user/login`,
+//                 method : 'POST',
+//                 data : dataInput
+//             })
+
+//             const action = {
+//                 type : 'LoginSuccess',
+//                 payload : data
+//             }
+//             await AsyncStorage.setItem('access_token', data.accessToken)
+//             // const value = await AsyncStorage.getItem('access_token')
+//             useNavigation('')
+//             dispatch(action)
+//         } catch (err) {
+//             console.log(err)
+//         }
+//     }
+// }
+
+export const userRegister = (dataInput) => {
+    return async(dispatch)=>{
+        try {
+            const { data } = await axios ({
+                url : `http://10.0.2.2:3000/user/register`,
+                method : 'POST',
+                data : dataInput
+            })
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const calculateTotal = (dataInput) =>{
+    return async(dispatch)=>{
+        try {
+         const action ={
+             type : 'calculateTotalOrder',
+             payload : dataInput
+         }
+         dispatch(action)
+        } catch (err) {
+         console.log(err);
+        }
     }
 }
