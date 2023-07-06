@@ -3,6 +3,7 @@ import * as TalkRn from '@talkjs/expo';
 
 function User2Driver(props) {
     // me = orang yg login, req.user.id
+    console.log(props, '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<')
     const me = {
         id: 'FOPY-user-1',
         name: 'FOPY User 1',

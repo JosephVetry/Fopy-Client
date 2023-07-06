@@ -7,9 +7,10 @@ import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TopupHistory from '../components/TopUpHistory';
 import OrderHistory from '../components/OrderHistory';
+import UserTransaction from './UserTransaction';
 import axios from 'axios'
 
-const BASE_URL = 'https://02b0-139-228-111-126.ngrok-free.app/user/getUser'
+const BASE_URL = 'https://fopy.ramais.online/user/getUser'
 const image = { uri: 'https://legacy.reactjs.org/logo-og.png' };
 const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
 
@@ -90,12 +91,13 @@ export default function Profile({ route, navigation }) {
     }
     return (
         <View style={[styles.container, { flexDirection: 'column', },]}>
-            <View style={{ flex: 0.2, backgroundColor: '#CAF0F8' }} />
-            <View style={{ flex: 1.5, alignItems: 'center', backgroundColor: '#CAF0F8', }}>
+            <View style={{ flex: 0.5, backgroundColor: '#CAF0F8' }} />
+            <View style={{ flex: 1.2, alignItems: 'center', backgroundColor: '#CAF0F8', }}>
                 <View style={styles.profilepicWrap}>
                     <Image style={styles.tinyLogo} source={{ uri: `https://api.dicebear.com/6.x/initials/png?seed=${getUserState.username}` }} />
                 </View>
-                <View key={getUserState.id} style={{marginBottom: 15, justifyContent:'center'}}>
+                <View key={getUserState.id} style={{ margin: 10, justifyContent: 'center' }}>
+                    {/**Server's not on, so there's no data */}
                     <Text style={styles.name}>{getUserState.username}</Text>
                     <Text style={styles.pos}>{getUserState.email}</Text>
                 </View>
@@ -139,7 +141,7 @@ export default function Profile({ route, navigation }) {
                     </Modal>
                 </View>
                 <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                    <Button mode='contained' onPress={() => setTopupModalOpen(true)}>Topup History</Button>
+                    <Button mode="contained" onPress={() => navigation.navigate('UserTransaction')}>Transaction</Button>              
                 </View>
                 <Modal visible={topupModalOpen} style={{ backgroundColor: 'green' }}>
                     <View style={{ alignItems: 'center' }}>
@@ -150,17 +152,17 @@ export default function Profile({ route, navigation }) {
                     </View>
                 </Modal>
                 <View style={{ justifyContent: 'center', width: '80%', alignSelf: 'center', marginTop: 15 }}>
-                    <Button mode='contained' onPress={() => setOrderModalOpen(true)}>Order History</Button>
+                    <Button mode='contained' onPress={() => setTopupModalOpen(true)}>Top-up History</Button>
                 </View>
-                <Modal visible={orderModalOpen}>
+                {/* <Modal visible={orderModalOpen}>
                     <View style={{ alignItems: 'center' }}>
-                        <OrderHistory />
+                        <UserTransaction />
                         <View style={{ marginTop: 20 }}>
                             <Button mode="contained" onPress={() => setOrderModalOpen(false)}>Back</Button>
                         </View>
                     </View>
-                </Modal>
-                <View style={{ flex: 0.7, flexDirection: 'row', justifyContent: 'center' }}>
+                </Modal> */}
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
                     <View style={{ width: '40%', alignSelf: 'center', marginTop: 15 }}>
                         <Button mode="contained" onPress={() => console.log('Back to Home')}>
                             Back
@@ -197,13 +199,12 @@ const styles = StyleSheet.create({
 
     },
     name: {
-        marginTop: 20,
-        fontSize: 16,
+        fontSize: 25,
         color: '#000',
         fontWeight: 'bold'
     },
     pos: {
-        fontSize: 14,
+        fontSize: 20,
         color: '#000',
         fontWeight: '300',
         fontStyle: 'italic'
@@ -214,7 +215,6 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        // padding: 20
     },
     title: {
         fontSize: 20,
@@ -223,6 +223,5 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 22,
     },
 });
