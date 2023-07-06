@@ -20,7 +20,7 @@ export default function DriverOrderList({ navigation }) {
     const fetchOrders = async () => {
       try {
         const accessToken = await AsyncStorage.getItem('accessToken');
-        const response = await axios.get('http://localhost:3000/driver/orders', {
+        const response = await axios.get('https://fopy.ramais.online/driver/orders', {
           headers: {
             access_token: accessToken,
           },

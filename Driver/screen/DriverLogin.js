@@ -8,13 +8,22 @@ import React, { useState } from 'react';
 export default function DriverLogin({ navigation }) {
   const Separator = () => <View style={styles.separator} />;
 
-  const [email, setEmail] = useState('david.johnson@example.com');
-  const [password, setPassword] = useState('password789');
+  // const [email, setEmail] = useState('david.johnson@example.com');
+  // const [password, setPassword] = useState('password789');
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/driver/login', { email, password });
-      const { id, access_token } = response.data;
+      // const response = await axios.post('https://fopy.ramais.online/driver/login', { email, password });
+      const { data } = await axios({
+        url: 'https://fopy.ramais.online/driver/login',
+        method: 'POST',
+        data: {
+          email: 'david.johnson@example.com',
+          password: 'password789'
+        }
+      })
+      console.log(data,` <<<<`)
+      const { id, access_token } = data;
       // console.log(access_token, 'access token<<<<<<<<');
 
       await AsyncStorage.setItem('userId', id.toString());
@@ -41,7 +50,7 @@ export default function DriverLogin({ navigation }) {
       <View style={[styles.container, { flexDirection: 'column' }]}>
         <Image
           style={styles.tinyLogo}
-          source={require('../assets/images/bike.png')}
+          source={require('../assets/images/fopy.png')}
         />
         <Separator />
         <Text style={styles.title}>
