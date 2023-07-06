@@ -87,11 +87,11 @@ const DriverOrderDetail = ({ navigation, route }) => {
     }, []);
 
     useEffect(() => {
-        console.log(Number.isNaN(distance))
+        // console.log(Number.isNaN(distance))
         if (Number.isNaN(distance)) return
 
         console.log("distance", distance)
-        console.log("showButton", showButton)
+        // console.log("showButton", showButton)
         if(+distance <= 10 && showButton === false){
             setShowButton(true)
         }
@@ -105,7 +105,7 @@ const DriverOrderDetail = ({ navigation, route }) => {
     useEffect (() => {
         const unsub = onSnapshot(doc(db, "DriverLocation", order.id.toString()), (doc) => {
             const newLocation = doc.data()
-            console.log(newLocation, "<<<Location user");
+            // console.log(newLocation, "<<<Location user");
             // set ke state
             // setDataFire(newLocation)
         })
