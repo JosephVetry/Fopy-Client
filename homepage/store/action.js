@@ -6,13 +6,13 @@ import { useNavigation } from "@react-navigation/native";
 
 export const fetchMitra = () =>{
     return async(dispatch)=>{
-        await AsyncStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6ImFsZXgwMSIsImlhdCI6MTY4ODYyMDIzOX0.gjnr4FhN8tuNTTrKmqRKyttDfJwjD4RmspD32Zk4t4Y")
+        await AsyncStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhbGV4MDFAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6IkFsZXgiLCJpYXQiOjE2ODg2NTQyNzl9.SlHqNkyWe-WtWtURVMArLoa52aoEznvxDloPK_ZAGAs")
         await AsyncStorage.setItem('balance', "250000")
 
         try {
             const value = await AsyncStorage.getItem('access_token')
             const { data } = await axios({
-            url: 'http://10.0.2.2:3000/user/getMitraByUser',
+            url: 'https://fopy.ramais.online/user/getMitraByUser',
             method: 'GET',
             headers : {
                 access_token : value
@@ -34,7 +34,7 @@ export const showMitraService = (id) =>{
         try {
             const value = await AsyncStorage.getItem('access_token')
             const { data } = await axios({
-                url : `http://10.0.2.2:3000/user/getMitraService/${id}`,
+                url : `https://fopy.ramais.online/user/getMitraService/${id}`,
                 method : 'GET',
                 headers : {
                     access_token : value
@@ -83,7 +83,7 @@ try {
 //     return async(dispatch) => {
 //         try {
 //             const { data } = await axios ({
-//                 url : `http://10.0.2.2:3000/user/login`,
+//                 url : `fopy.ramaisonline/user/login`,
 //                 method : 'POST',
 //                 data : dataInput
 //             })
@@ -106,7 +106,7 @@ export const userRegister = (dataInput) => {
     return async(dispatch)=>{
         try {
             const { data } = await axios ({
-                url : `http://10.0.2.2:3000/user/register`,
+                url : `https://fopy.ramais.online/user/register`,
                 method : 'POST',
                 data : dataInput
             })

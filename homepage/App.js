@@ -20,7 +20,7 @@ export default function App() {
     <NavigationContainer>
       <IconComponentProvider IconComponent={MaterialCommunityIcons}>
         <Stack.Navigator
-          initialRouteName="Welcome"
+          // initialRouteName="Welcome"
         >
           {/* <Stack.Screen
           name="Login"
