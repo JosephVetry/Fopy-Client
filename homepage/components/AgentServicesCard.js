@@ -205,7 +205,7 @@ export default function AgentServicesCard(data) {
             </TouchableOpacity>
           </View>
           <View style={{ backgroundColor: "#DFE9F4", flex: 0.29 }}>
-            <Text>*per lembar price : {data.data.price}</Text>
+            <Text>*price per copy : {data.data.price}</Text>
           </View>
           <View
             style={{
@@ -258,8 +258,7 @@ export default function AgentServicesCard(data) {
       >
         <View style={{ flex: 1, borderRadius: 20 }}>
           <Text style={styles.nameFont}>{data.data.name}</Text>
-          <Text style={styles.nameFont2}>type</Text>
-          <Text style={styles.nameFont2}>{data.data.type}</Text>
+          <Text style={styles.nameFont2}>type : {data.data.type}</Text>
         </View>
         <View style={{ flex: 0.25, borderRadius: 20, alignItems: "center" }}>
           <IconButton
@@ -302,6 +301,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     padding: 7,
+    fontWeight : '900'
   },
   nameFont2: {
     fontSize: 10,
@@ -337,11 +337,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    backgroundColor: "rgba(90, 154, 230, 1)",
   },
   textStyle2: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    
   },
   buttonStyle: {
     backgroundColor: "rgba(90, 154, 230, 1)",

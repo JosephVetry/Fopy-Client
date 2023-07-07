@@ -1,17 +1,17 @@
 export const carouselData = 
 [{
-    title : "this is title number 1",
-    url : "https://eskipaper.com/images/beautiful-scenery-2.jpg",
+    title : "Make your job easier",
+    url : "https://i.pinimg.com/474x/60/0a/0a/600a0ad4eaebb796eedebaf6123787bc.jpg",
     description : "this is description number 1"
 
 },
 {
-    title : "this is title number 2",
-    url : "https://i.pinimg.com/736x/9d/c3/f3/9dc3f318cfb87f0c442f3d0437eaa8b6.jpg",
+    title : "Print everywhere you want",
+    url : "https://i.pinimg.com/474x/9d/a7/b3/9da7b3ff40031b6a784dd3561e8a371b.jpg",
     description : "this is description number 2"
 },
 {  
-    title : "this is title number 3",
-    url : "https://i.pinimg.com/736x/9d/c3/f3/9dc3f318cfb87f0c442f3d0437eaa8b6.jpg",
+    title : "Without difficulty",
+    url : "https://img.freepik.com/free-photo/woman-work-office-using-printer_23-2149456933.jpg?size=626&ext=jpg&ga=GA1.2.1738257458.1688462051&semt=ais",
     description : "this is description number 3"
 }]

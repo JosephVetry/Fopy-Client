@@ -104,7 +104,7 @@ export default function UserCart({ navigation }) {
                 return new Error();
               } else if (total > value === false) {
                 const { data } = await axios({
-                  url: `http://10.0.2.2:3000/user/newOrder`,
+                  url: `https://fopy.ramais.online/user/newOrder`,
                   method: "POST",
                   headers: {
                     access_token: token,

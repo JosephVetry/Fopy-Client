@@ -11,27 +11,23 @@ const ServicesCard = ({data, navigation}) => {
   const dispatch = useDispatch()
   return (
     <View style={styles.cardContainer}>
+      <Image
+      source={{
+        uri: 'https://png.pngtree.com/thumb_back/fh260/back_our/20190623/ourmid/pngtree-blue-gradient-geometric-flat-business-card-background-image_243088.jpg'
+      }}
+      style={styles.backgroundImage}
+      />
       <View style={{ flex: 1, flexDirection: "row" }}>
         <View style={{ flex: 0.5, marginEnd : 5 }}>
-          <Image
-            source={{
-              uri: "https://nickroberts.ninja/wp-content/uploads/2017/07/react.jpg",
-            }}
-            style={{
-              flex: 1,
-              width: "100%",
-              borderRadius: 20,
-              resizeMode: "contain"
-            }}
-          />
+          
         </View>
         <View style={{ flex: 1 }}>
-          <View style={{ flex: 4 }}>
-            <Text style={{marginBottom : 10, marginTop : 10, fontSize : 20}}>{data.mitraName}</Text>
-            <Text>{data.status}</Text>
-            <Text>distance</Text>
+          <View style={{ flex: 4, alignItems : 'center', marginRight : 40 }}>
+            <Text style={{marginBottom : 10, marginTop : 10, fontSize : 25, fontWeight : '900'}}>{data.mitraName}</Text>
+            <Text> status : {data.status}</Text>
+            <Text>distance : 2km</Text>
           </View>
-          <View style={{ flex: 1,  flexDirection : 'row' }}>
+          <View style={{ flex: 1,  flexDirection : 'row',  }}>
             <View style={{ flex : 1, justifyContent : 'center', alignItems : 'center'}}>
             <IconButton onPress={() => {console.log('ini chat')}}  icon={<Icon name="chat" size={30}/>} style={{flex : 1}} color="black"/>
             </View>
@@ -39,7 +35,7 @@ const ServicesCard = ({data, navigation}) => {
             <IconButton onPress={() => {
               navigation.navigate('AgentDetail')
               dispatch(showMitraService(data.id))
-              } } icon={<Icon name="home" size={30}/>} style={{flex : 1}} color="black"/>
+              } } icon={<Icon name="arrow-right" size={30}/>} style={{flex : 1}} color="black"/>
             </View>
           </View>
         </View>
@@ -52,8 +48,8 @@ const deviceWidth = Math.round(Dimensions.get("window").width);
 const styles = StyleSheet.create({
   cardContainer: {
     width: deviceWidth - 39,
-    backgroundColor: "#DFE9F4",
     height: 150,
+    backgroundColor: "#DFE9F4",
     borderRadius: 20,
     padding: 10,
     shadowColor: "#90E0EF",
@@ -64,7 +60,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     elevation: 10,
     shadowRadius: 10,
-    marginBottom : 20
+    marginBottom : 20,
+    resizeMode : 'cover'
+  },
+  backgroundImage: {
+    width: deviceWidth - 39,
+    height: 150,
+    borderRadius: 20,
+    resizeMode: "cover",
+    position : "absolute"
   },
 });
 

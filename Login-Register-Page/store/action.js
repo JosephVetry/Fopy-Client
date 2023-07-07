@@ -5,7 +5,7 @@ export const userLogin = (dataInput) =>{
     return async(dispatch) => {
         try {
             const { data } = await axios ({
-                url : `http://10.0.2.2:3000/user/login`,
+                url : `https://fopy.ramais.online/user/login`,
                 method : 'POST',
                 data : dataInput
             })
@@ -24,7 +24,7 @@ export const userRegister = (dataInput) => {
     return async(dispatch)=>{
         try {
             const { data } = await axios ({
-                url : `http://10.0.2.2:3000/user/register`,
+                url : `https://fopy.ramais.online/user/register`,
                 method : 'POST',
                 data : dataInput
             })

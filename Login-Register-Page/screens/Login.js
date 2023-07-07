@@ -19,7 +19,7 @@ export const Login = ({ navigation }) => {
     const submitData = async () =>{
         try {
             const { data } = await axios({
-                url : `http://10.0.2.2:3000/user/login`,
+                url : `https://fopy.ramais.online/user/login`,
                 method : 'POST',
                 data : dataInput
             })

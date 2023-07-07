@@ -44,9 +44,9 @@ export default function AgentDetail({navigation}) {
             >
             </FlatList>
           </View>
-          <View style ={{flex : 0.5}}>
+          {/* <View style ={{flex : 0.5}}>
             <ProductsCard />
-          </View>
+          </View> */}
           <View style ={{flex : 0.5, justifyContent : 'center', width : 200,}}>
           <Button onPress={()=>{
             navigation.navigate('UserCart')
@@ -55,7 +55,7 @@ export default function AgentDetail({navigation}) {
                 iconContainerStyle={{ marginRight: 10 }}
                 titleStyle={{ fontWeight: '700' }}
                 buttonStyle={{
-                  backgroundColor: 'rgba(90, 154, 230, 1)',
+                  backgroundColor: '#31ABF0',
                   borderColor: 'transparent',
                   borderWidth: 0,
                   borderRadius: 30,

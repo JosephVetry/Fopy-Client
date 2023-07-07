@@ -25,12 +25,12 @@ export default function HomePage({navigation}) {
         },
       ]}
     >
-      <View style={{ flex: 0.5 }}>
-        <View style={{ flex: 1, padding: 10, flexDirection: "row-reverse" }}>
-          <View style={{ flex: 0.5 }}>
+      <View style={{ flex: 0.6, }}>
+        <View style={{ flex: 1, padding: 10, flexDirection: "row-reverse", backgroundColor : '#016DD7' }}>
+          <View style={{ flex: 0.5}}>
             <Image
               source={{
-                uri: "http://pm1.narvii.com/6453/bad5788e775bd7b2bd8e6c60d4e4556c500217a6_hq.jpg",
+                uri: "https://www.lensmen.ie/wp-content/uploads/2015/02/Profile-Portrait-Photographer-in-Dublin-Ireland..jpg",
               }}
               style={{
                 flex: 1,
@@ -41,13 +41,16 @@ export default function HomePage({navigation}) {
             />
           </View>
           <View style={{ flex: 4, justifyContent: "center"}}>
+            <Text style={{fontWeight : '800', fontSize : 18, color : 'white'}}>
+              Welcome Back, Sara
+            </Text>
           </View>
         </View>
       </View>
       <View style={{ flex: 3 }}>
         <Carousel data={carouselData} />
       </View>
-      <View style={{ flex: 4, marginHorizontal: 20, marginVertical: 20 }}>
+      <View style={{ flex: 4, marginHorizontal: 20 }}>
         <FlatList
         showsVerticalScrollIndicator = {false}
         data = {mitras}
@@ -67,5 +70,6 @@ export default function HomePage({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor : '#FFFF' 
   },
 });
